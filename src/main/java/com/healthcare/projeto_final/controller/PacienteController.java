@@ -28,6 +28,11 @@ public class PacienteController {
         return new ResponseEntity<>(service.listar(),HttpStatus.OK);
     }
 
+    @PutMapping("/salvar")
+    public ResponseEntity<String> salvar(@RequestBody Paciente paciente) {
+        return new ResponseEntity<>(service.salvar(paciente), HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> remover(@PathVariable Long id) {
         String resposta = service.remover(id);

@@ -25,6 +25,10 @@ public class PacienteService {
         return "Cadastrado.";
     }
 
+    public String salvar(Paciente paciente){
+        repository.save(paciente);
+        return "Paciente salvo com sucesso";
+    }
 
     public String remover(Long id) {
         Paciente paciente = repository.findById(id).orElse(null);
