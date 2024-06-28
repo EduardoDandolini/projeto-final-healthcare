@@ -16,8 +16,14 @@ public class PacienteService {
     PacienteRepository repository;
 
     public List<PacienteDto> listar(){
-        List<Paciente> paciente = repository.findAll();
-        return paciente.stream().map(x -> new PacienteDto(x)).collect(Collectors.toList());
+        List<Paciente> pacientes = repository.findAll();
+        return pacientes.stream().map(paciente -> new PacienteDto(
+                paciente.getNome(),
+                paciente.getCpf(),
+                paciente.getTelefone(),
+                paciente.getGenero(),
+                paciente.getDataNascimento()
+        )).collect(Collectors.toList());
     }
 
     public String cadastro(Paciente paciente){
