@@ -1,7 +1,10 @@
 package com.healthcare.projeto_final.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.*;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -20,5 +23,8 @@ public class Paciente extends BaseEntity{
     private String genero;
 
     private String dataNascimento;
+
+    @OneToMany(mappedBy = "paciente")
+    private List<Agendamento> agendamentos;
 
 }
