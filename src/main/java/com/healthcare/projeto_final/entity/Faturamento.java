@@ -11,9 +11,9 @@ import lombok.*;
 @Entity
 public class Faturamento extends BaseEntity{
 
-    private Procedimento procedimento;
-    private Material material;
-    private Medicamento medicamento;
+//    private Procedimento procedimento;
+//    private Material material;
+//    private Medicamento medicamento;
     private Double valorTotal;
 
 }

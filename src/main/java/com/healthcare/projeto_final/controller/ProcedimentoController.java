@@ -1,11 +1,9 @@
 package com.healthcare.projeto_final.controller;
 
-import com.healthcare.projeto_final.dto.PacienteDto;
-import com.healthcare.projeto_final.entity.Paciente;
-import com.healthcare.projeto_final.repository.PacienteRepository;
-import com.healthcare.projeto_final.service.PacienteService;
+import com.healthcare.projeto_final.dto.ProcedimentoDto;
+import com.healthcare.projeto_final.entity.Procedimento;
+import com.healthcare.projeto_final.service.ProcedimentoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,29 +11,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/paciente")
+@RequestMapping("/procedimento")
 @RequiredArgsConstructor
-public class PacienteController {
+public class ProcedimentoController {
 
-    private final PacienteService service;
+    private final ProcedimentoService service;
 
-    @PostMapping("/cadastro")
-    public ResponseEntity<Paciente> cadastrar(@RequestBody PacienteDto dto){
+    @PostMapping("/salvar")
+    public ResponseEntity<Procedimento> save(@RequestBody ProcedimentoDto dto){
         return ResponseEntity.ok(service.save(dto));
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<Paciente>> findAll(){
+    public ResponseEntity<List<Procedimento>> findAll(){
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/listar/{id}")
-    public ResponseEntity<Paciente> findById(@PathVariable Long id){
+    public ResponseEntity<Procedimento> findById(@PathVariable Long id){
         return ResponseEntity.ok(service.findById(id));
     }
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<Paciente> atualizar(@PathVariable Long id, @RequestBody PacienteDto dto){
+    public ResponseEntity<Procedimento> atualizar(@PathVariable Long id, @RequestBody ProcedimentoDto dto){
         return ResponseEntity.ok(service.update(id, dto));
     }
 
@@ -45,6 +43,4 @@ public class PacienteController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-
 }
-

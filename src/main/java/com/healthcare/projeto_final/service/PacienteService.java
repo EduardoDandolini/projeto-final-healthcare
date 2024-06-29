@@ -3,47 +3,55 @@ package com.healthcare.projeto_final.service;
 import com.healthcare.projeto_final.dto.PacienteDto;
 import com.healthcare.projeto_final.entity.Paciente;
 import com.healthcare.projeto_final.repository.PacienteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.healthcare.projeto_final.service.interfaces.AbstractService;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
-public class PacienteService {
+@RequiredArgsConstructor
+public class PacienteService implements AbstractService<Paciente, PacienteDto> {
 
-    @Autowired
-    PacienteRepository repository;
+    private final PacienteRepository repository;
 
-    public List<PacienteDto> listar(){
-        List<Paciente> pacientes = repository.findAll();
-        return pacientes.stream().map(paciente -> new PacienteDto(
-                paciente.getNome(),
-                paciente.getCpf(),
-                paciente.getTelefone(),
-                paciente.getGenero(),
-                paciente.getDataNascimento()
-        )).collect(Collectors.toList());
+    @Override
+    public Paciente save(PacienteDto entity) {
+        return repository.save(Paciente.builder()
+                .nome(entity.nome())
+                .cpf(entity.cpf())
+                .dataNascimento(entity.dataNascimento())
+                .genero(entity.genero())
+                .telefone(entity.telefone())
+                .build());
     }
 
-    public String cadastro(Paciente paciente){
-        repository.save(paciente);
-        return "Cadastrado.";
+    @Override
+    public Paciente findById(Long id) {
+        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Paciente não encontrado"));
     }
 
-    public String salvar(Paciente paciente){
-        repository.save(paciente);
-        return "Paciente salvo com sucesso";
+    @Override
+    public List<Paciente> findAll() {
+        return repository.findAll();
     }
 
-    public String remover(Long id) {
-        Paciente paciente = repository.findById(id).orElse(null);
-        if (paciente != null) {
+    @Override
+    public Paciente update(Long id, PacienteDto entity) {
+        var paciente = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Paciente não encontrado"));
+        paciente.setNome(entity.nome());
+        paciente.setCpf(entity.cpf());
+        paciente.setDataNascimento(entity.dataNascimento());
+        paciente.setGenero(entity.genero());
+        paciente.setTelefone(entity.telefone());
+        return repository.save(paciente);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        if (repository.existsById(id)) {
             repository.deleteById(id);
-            return "Paciente removido com sucesso.";
-        } else {
-            return "Paciente não encontrado.";
         }
     }
-
 }

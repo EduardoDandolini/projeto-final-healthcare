@@ -15,5 +15,4 @@ public class Procedimento extends BaseEntity{
     private String descricao;
     private Double valor;
 
-
 }
