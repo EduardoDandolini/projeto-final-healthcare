@@ -24,7 +24,15 @@ public class Paciente extends BaseEntity{
 
     private String dataNascimento;
 
-//    @OneToMany(mappedBy = "paciente")
-//    private List<Agendamento> agendamentos;
+    @OneToMany(mappedBy = "paciente")
+    private List<Agendamento> agendamentos;
 
+    @OneToMany(mappedBy = "paciente")
+    private List<Prontuario> prontuarios;
+
+    @OneToMany(mappedBy = "paciente")
+    private List<Faturamento> contasPaciente;
+
+    @OneToMany(mappedBy = "paciente")
+    private List<Prescricoes> prescricoes;
 }

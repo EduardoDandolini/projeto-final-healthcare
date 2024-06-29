@@ -1,6 +1,6 @@
 package com.healthcare.projeto_final.entity;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -20,5 +20,9 @@ public class Prontuario extends BaseEntity {
     private LocalDateTime dataAlta;
 
     private String convenio;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "paciente_id")
+    private Paciente paciente;
 
 }

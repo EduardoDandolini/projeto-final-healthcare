@@ -1,9 +1,6 @@
 package com.healthcare.projeto_final.entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -21,6 +18,7 @@ public class Agendamento extends BaseEntity{
     private LocalDateTime dataHora;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
 }
