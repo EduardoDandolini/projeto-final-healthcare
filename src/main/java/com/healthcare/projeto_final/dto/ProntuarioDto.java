@@ -3,12 +3,14 @@ package com.healthcare.projeto_final.dto;
 import java.time.LocalDateTime;
 
 public record ProntuarioDto(
-        String nomePaciente,
+        Long idPaciente,
 
         LocalDateTime dataEntrada,
 
         LocalDateTime dataAlta,
 
-        String convenio
+        String convenio,
+
+        String evolucaoMedica
 ) {
 }

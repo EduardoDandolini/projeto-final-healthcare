@@ -20,7 +20,7 @@ public class Prescricoes extends BaseEntity{
 
     private String nomeMedico;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "prescricoes_medicamento",
             joinColumns = @JoinColumn(name = "prescricao_id"),

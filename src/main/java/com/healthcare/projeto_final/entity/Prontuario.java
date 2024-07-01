@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 public class Prontuario extends BaseEntity {
 
-    private String nomePaciente;
+    private String evolucaoMedica;
 
     private LocalDateTime dataEntrada;
 
